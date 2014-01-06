@@ -30,6 +30,19 @@ OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
 
+#contains(HOMEBREW, 1) {
+    message(Building with Homebrew libs)
+    macx {
+        BDB_LIB_PATH=/usr/local/opt/berkeley-db4/lib
+        OPENSSL_INCLUDE_PATH=/usr/local/opt/openssl/include
+        OPENSSL_LIB_PATH=/usr/local/opt/openssl/lib
+        BOOST_INCLUDE_PATH = /usr/local/include
+        BOOST_LIB_PATH = /usr/local/lib
+        BDB_LIB_NAME = libdb_cxx
+
+    }
+#}
+
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
     # Mac: compile for maximum compatibility (10.5, 32-bit)
@@ -316,6 +329,10 @@ isEmpty(BDB_LIB_SUFFIX) {
     macx:BDB_LIB_SUFFIX = -4.8
 }
 
+isEmpty(BDB_LIB_NAME) {
+    macx:BDB_LIB_NAME = db_cxx
+}
+
 isEmpty(BDB_INCLUDE_PATH) {
     macx:BDB_INCLUDE_PATH = /opt/local/include/db48
 }
@@ -348,12 +365,13 @@ windows:!contains(MINGW_THREAD_BUGFIX, 0) {
     LIBS += -lrt
 }
 
+macx:QT += macextras widgets
 macx:HEADERS += src/qt/macdockiconhandler.h
 macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:TARGET = "Luckycoin-Qt"
+macx:TARGET = "Piratecoin-Qt"
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
