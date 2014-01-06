@@ -33,7 +33,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x9b7bce58999062b63bfb18586813c42491fa32f4591d8d3043cb4fa9e551541b");
+uint256 hashGenesisBlock("0xf02b17f6783110bb933a5ba5bf88139d67686cfc4eac611e7698b110864fdcc5");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Piratecoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -839,42 +839,42 @@ int static generateMTRandom(unsigned int s, int range)
 
 int64 static GetBlockValue(int nHeight, int64 nFees, uint256 prevHash)
 {
-    int64 nSubsidy = 88 * COIN;
+    int64 nSubsidy = 100 * COIN;
 
-    if(nHeight < 50000)   
+    if(nHeight < 50000)
     {
         std::string cseed_str = prevHash.ToString().substr(8,7);
 		const char* cseed = cseed_str.c_str();
 		long seed = hex2long(cseed);
-        
+
 		int rand = generateMTRandom(seed, 100000);
         
 		if(rand > 30000 && rand < 35001)		
-			nSubsidy = 188 * COIN;
+			nSubsidy = 200 * COIN;
 		else if(rand > 70000 && rand < 71001)	
-			nSubsidy = 588 * COIN;
+			nSubsidy = 600 * COIN;
 		else if(rand > 50000 && rand < 50011)	
-			nSubsidy = 5888 * COIN;
+			nSubsidy = 6000 * COIN;
     }
     else
     {
         // Subsidy is cut in half every 100,000 blocks, which will occur approximately every 2 months
         nSubsidy >>= (nHeight / 100000); // Piratecoin: 100K blocks in ~2 months
-        
+
         std::string cseed_str = prevHash.ToString().substr(8,7);
 		const char* cseed = cseed_str.c_str();
 		long seed = hex2long(cseed);
-        
+
 		int rand = generateMTRandom(seed, 100000);
-        
-		if(rand > 30000 && rand < 35001)		
+
+		if(rand > 30000 && rand < 35001)
 			nSubsidy *= 2;
-		else if(rand > 70000 && rand < 71001)	
+		else if(rand > 70000 && rand < 71001)
 			nSubsidy *= 5;
-		else if(rand > 50000 && rand < 50011)	
-			nSubsidy *= 58;
+		else if(rand > 50000 && rand < 50011)
+			nSubsidy *= 60;
     }
-    
+
     return nSubsidy + nFees;
 }
 
@@ -911,7 +911,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     unsigned int nProofOfWorkLimit = bnProofOfWorkLimit.GetCompact();
 
     // Piratecoin difficulty adjustment protocol switch
-    bool fNewDifficultyProtocol = (pindexLast->nHeight+1 >= 69360 || fTestNet);
+    bool fNewDifficultyProtocol = (pindexLast->nHeight+1 >= 0 || fTestNet);
 
     int64 nTargetTimespanCurrent = fNewDifficultyProtocol ? nTargetTimespan : (nTargetTimespan*12);
     int64 nInterval = nTargetTimespanCurrent / nTargetSpacing;
@@ -2071,7 +2071,7 @@ bool LoadBlockIndex(bool fAllowNew)
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x5d2fc8d1cb81c089c8dc7a71d755eb2589a7973471598dc513a599e3f0662eaf");
+        hashGenesisBlock = uint256("0xf02b17f6783110bb933a5ba5bf88139d67686cfc4eac611e7698b110864fdcc5");
     }
 
     //
@@ -2101,7 +2101,7 @@ bool LoadBlockIndex(bool fAllowNew)
 		//   vMerkleTree: 6f80efd038 
 
         // Genesis block
-        const char* pszTimestamp = "May 22, 2013, 12:16 a.m. EDT: Japan’s Nikkei Stock Average JP:NIK +1.77%, which ended at their highest level in more than five years in each of the last three trading sessions, climbed a further 1.2% Wednesday";
+        const char* pszTimestamp = "Jan 6 0312 - David Cameron tells older voters the state pension will continue to go up by at least 2.5% a year if the Conservatives win the 2015 general election.";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2113,14 +2113,14 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1369199888;
+        block.nTime    = 1388977886;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 11288888;
+        block.nNonce   = 108996231;
 
         if (fTestNet)
         {
-            block.nTime    = 1361718171;
-            block.nNonce   = 108788888;
+            block.nTime    = 1388977886;
+            block.nNonce   = 108996231;
         }
 
         //// debug print
@@ -2128,10 +2128,10 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
         
-        assert(block.hashMerkleRoot == uint256("0x6f80efd038566e1e3eab3e1d38131604d06481e77f2462235c6a9a94b1f8abf9"));
+        assert(block.hashMerkleRoot == uint256("e1a25400af3abc2be5189cb04f74af2b128ebe53d4b2d127481f3fd8d5d6d341"));
 
         // If genesis block hash does not match, then generate new genesis hash.
-        if (false && block.GetHash() != hashGenesisBlock)
+        if (true && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
