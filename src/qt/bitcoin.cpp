@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
     app.setOrganizationName("Piratecoin");
-    app.setOrganizationDomain("piratecoinfoundation.org");
+    app.setOrganizationDomain("piratecoin.co");
     if(GetBoolArg("-testnet")) // Separate UI settings for testnet
         app.setApplicationName("Piratecoin-Qt-testnet");
     else

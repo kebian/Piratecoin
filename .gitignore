@@ -1,6 +1,6 @@
 src/*.exe
-src/luckycoind
-src/test_luckycoin
+src/piratecoind
+src/test_piratecoin
 src/build.h
 .*.swp
 *.*~*
@@ -13,7 +13,7 @@ src/build.h
 #compilation and Qt preprocessor part
 *.qm
 Makefile
-luckycoin-qt
+piratecoin-qt
 #resources cpp
 qrc_*.cpp
 #qt creator

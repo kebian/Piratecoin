@@ -7,7 +7,7 @@ handle those translations.
 Files and Folders
 -----------------
 
-### luckycoin-qt.pro
+### piratecoin-qt.pro
 
 This file takes care of generating `.qm` files from `.ts` files. It is mostly
 automated.

@@ -4,7 +4,7 @@ index d07fc04..221ee3a 100644
 +++ b/src/makefile.osx
 @@ -5,19 +5,25 @@
  
- # Mac OS X makefile for luckycoin
+ # Mac OS X makefile for piratecoin
  # Originally by Laszlo Hanyecz (solar@heliacal.net)
 +#
 +# Makefile patched for compiling against Homebrew libraries

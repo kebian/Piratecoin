@@ -1,13 +1,13 @@
-Compiling/running luckycoind unit tests
+Compiling/running piratecoind unit tests
 ------------------------------------
 
-luckycoind unit tests are in the src/test/ directory; they
+piratecoind unit tests are in the src/test/ directory; they
 use the Boost::Test unit-testing framework.
 
 To compile and run the tests:
 cd src
-make -f makefile.unix test_luckycoin  # Replace makefile.unix if you're not on unix
-./test_luckycoin   # Runs the unit tests
+make -f makefile.unix test_piratecoin  # Replace makefile.unix if you're not on unix
+./test_piratecoin   # Runs the unit tests
 
 If all tests succeed the last line of output will be:
 *** No errors detected
@@ -15,19 +15,19 @@ If all tests succeed the last line of output will be:
 To add more tests, add BOOST_AUTO_TEST_CASE's to the existing
 .cpp files in the test/ directory or add new .cpp files that
 implement new BOOST_AUTO_TEST_SUITE's (the makefiles are
-set up to add test/*.cpp to test_luckycoin automatically).
+set up to add test/*.cpp to test_piratecoin automatically).
 
 
-Compiling/running Luckycoin-Qt unit tests
+Compiling/running Piratecoin-Qt unit tests
 ---------------------------------------
 
-Luckycoin-Qt unit tests are in the src/qt/test/ directory; they
+Piratecoin-Qt unit tests are in the src/qt/test/ directory; they
 use the Qt unit-testing framework.
 
 To compile and run the tests:
-qmake luckycoin-qt.pro BITCOIN_QT_TEST=1
+qmake piratecoin-qt.pro BITCOIN_QT_TEST=1
 make
-./luckycoin-qt_test
+./piratecoin-qt_test
 
 To add more tests, add them to the src/qt/test/ directory,
-the src/qt/test/test_main.cpp file, and luckycoin-qt.pro.
+the src/qt/test/test_main.cpp file, and piratecoin-qt.pro.
