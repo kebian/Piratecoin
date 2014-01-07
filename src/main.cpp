@@ -15,7 +15,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/random/mersenne_twister.hpp>
-#include <boost/random/uniform_int_distribution.hpp>
+#include <boost/random/uniform_int.hpp>
 
 using namespace std;
 using namespace boost;
@@ -832,9 +832,10 @@ uint256 static GetOrphanRoot(const CBlock* pblock)
 
 int static generateMTRandom(unsigned int s, int range)
 {
-	random::mt19937 gen(s);
-    random::uniform_int_distribution<> dist(1, range);
-    return dist(gen);
+	boost::mt19937 gen(s);
+	//random::uniform_int_distribution<> dist(1, range);
+	uniform_int<> dist(1,range);
+	return dist(gen);
 }
 
 int64 static GetBlockValue(int nHeight, int64 nFees, uint256 prevHash)
