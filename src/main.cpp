@@ -34,7 +34,7 @@ unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
 uint256 hashGenesisBlock("0xf02b17f6783110bb933a5ba5bf88139d67686cfc4eac611e7698b110864fdcc5");
-static CBigNum bnProofOfWorkLimit(~uint256(0) >> 16); // Piratecoin: starting difficulty is 1 / 2^12
+static CBigNum bnProofOfWorkLimit(~uint256(0) >> 16);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 CBigNum bnBestChainWork = 0;
