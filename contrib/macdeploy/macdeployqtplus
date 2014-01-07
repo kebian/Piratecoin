@@ -568,12 +568,12 @@ if config.plugins:
     if verbose >= 2:
         print "+ Deploying plugins +"
     
-    try:
-        deployPlugins(applicationBundle, deploymentInfo, config.strip, verbose)
-    except RuntimeError as e:
-        if verbose >= 1:
-            sys.stderr.write("Error: %s\n" % str(e))
-        sys.exit(ret)
+#    try:
+#        deployPlugins(applicationBundle, deploymentInfo, config.strip, verbose)
+#    except RuntimeError as e:
+#        if verbose >= 1:
+#            sys.stderr.write("Error: %s\n" % str(e))
+#        sys.exit(ret)
 
 # ------------------------------------------------
 
