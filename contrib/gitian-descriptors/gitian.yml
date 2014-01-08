@@ -43,8 +43,8 @@ script: |
   cd Piratecoin
   mkdir -p $OUTDIR/src
   git archive HEAD | tar -x -C $OUTDIR/src
-  cp $OUTDIR/README.md $OUTDIR
-  cp $OUTDIR/COPYING $OUTDIR
+  cp $OUTDIR/src/README.md $OUTDIR/src
+  cp $OUTDIR/src/COPYING $OUTDIR/src
   cd src
   make -f makefile.unix STATIC=1 OPENSSL_INCLUDE_PATH="$INSTDIR/include" OPENSSL_LIB_PATH="$INSTDIR/lib" $MAKEOPTS piratecoind USE_UPNP=0 DEBUGFLAGS= USE_SSE2=1
   mkdir -p $OUTDIR/bin/$GBUILD_BITS
