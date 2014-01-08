@@ -35,7 +35,7 @@ OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
 
-clang {
+clang_pch_style {
     message(Building for clang)
     QMAKE_CXXFLAGS += -stdlib=libc++
     QMAKE_LFLAGS += -stdlib=libc++
