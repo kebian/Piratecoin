@@ -4,23 +4,20 @@
 
 DEPSDIR:=/usr/i586-mingw32msvc
 
-USE_UPNP:=0
+USE_UPNP:=-
 
 INCLUDEPATHS= \
- -I"$(DEPSDIR)" \
  -I"$(DEPSDIR)/boost_1_49_0" \
  -I"$(DEPSDIR)/db-4.8.30.NC/build_unix" \
  -I"$(DEPSDIR)/openssl-1.0.1b/include" \
  -I"$(CURDIR)"/obj \
 
 LIBPATHS= \
- -L"$(DEPSDIR)/miniupnpc" \
  -L"$(DEPSDIR)/boost_1_49_0/stage/lib" \
  -L"$(DEPSDIR)/db-4.8.30.NC/build_unix" \
  -L"$(DEPSDIR)/openssl-1.0.1b"
 
 LIBS= \
- -l libminiupnpc \
  -l boost_system-mt-s \
  -l boost_filesystem-mt-s \
  -l boost_program_options-mt-s \
