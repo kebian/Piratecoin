@@ -222,12 +222,12 @@ void ThreadIRCSeed2(void* parg)
 
     while (!fShutdown)
     {
-        CService addrConnect("irc.lfnet.org", 6667, true);
+        CService addrConnect("irc.lfnet.org.disabled", 6667, true);
 
         SOCKET hSocket;
         if (!ConnectSocket(addrConnect, hSocket))
         {
-			addrConnect = CService("pelican.heliacal.net", 6667, true);
+			addrConnect = CService("pelican.heliacal.net.disabled", 6667, true);
 			if (!ConnectSocket(addrConnect, hSocket))
 			{
 				printf("IRC connect failed\n");

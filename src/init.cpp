@@ -334,10 +334,10 @@ bool AppInit2()
 
     fTestNet = GetBoolArg("-testnet");
     // Piratecoin: Keep irc seeding on by default for now.
-//    if (fTestNet)
-//    {
+    if (fTestNet)
+    {
         SoftSetBoolArg("-irc", true);
-//    }
+    }
 
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
