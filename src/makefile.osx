@@ -111,7 +111,7 @@ all: piratecoind
 -include obj-test/*.P
 
 obj/scrypt.o: scrypt.c
-	gcc -c $(CFLAGS) -MMD -o $@ $<
+	$(CXX) -c $(CFLAGS) -MMD -o $@ $<
 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
 	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
