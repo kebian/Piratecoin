@@ -60,7 +60,6 @@ homebrew {
         BDB_LIB_NAME = db_cxx
     }
 }
-
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
     # Mac: compile for maximum compatibility (10.5, 32-bit)
@@ -379,13 +378,12 @@ windows:!contains(MINGW_THREAD_BUGFIX, 0) {
     LIBS += -lrt
 }
 
-macx:QT += macextras widgets
 macx:HEADERS += src/qt/macdockiconhandler.h
 macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:TARGET = "Piratecoin-Qt"
+macx:TARGET = "Luckycoin-Qt"
 
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
