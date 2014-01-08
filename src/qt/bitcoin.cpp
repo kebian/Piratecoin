@@ -8,10 +8,6 @@
 #include "guiutil.h"
 #include "guiconstants.h"
 
-#include "init.h"
-#include "ui_interface.h"
-#include "qtipcserver.h"
-
 #include <QApplication>
 #include <QMessageBox>
 #include <QTextCodec>
@@ -19,6 +15,10 @@
 #include <QTranslator>
 #include <QSplashScreen>
 #include <QLibraryInfo>
+
+#include "init.h"
+#include "ui_interface.h"
+#include "qtipcserver.h"
 
 #include <boost/interprocess/ipc/message_queue.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -145,10 +145,6 @@ int main(int argc, char *argv[])
         }
     }
 #endif
-
-    // Internal string conversion is all UTF-8
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 
     Q_INIT_RESOURCE(bitcoin);
     QApplication app(argc, argv);

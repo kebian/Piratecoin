@@ -15,6 +15,11 @@ CONFIG += no_include_pwd
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
+# For Homebrew builds on mac use install version 5 of Berkeley DB
+#   brew install berkeley-db
+# And tell qmake you're using Homebrew by uncommenting the line below
+   CONFIG += homebrew
+
 windows {
     BOOST_INCLUDE_PATH=C:/deps/boost
     BOOST_LIB_PATH=C:/deps/boost/stage/lib
@@ -29,6 +34,32 @@ windows {
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
+
+clang {
+    message(Building for clang)
+    QMAKE_CXXFLAGS += -stdlib=libc++
+    QMAKE_LFLAGS += -stdlib=libc++
+    QMAKE_CXXFLAGS_CXX11 -= -std=c++11
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+}
+
+homebrew {
+    message(Building with Homebrew libs)
+    macx {
+        OPENSSL_PATH=/usr/local/opt/openssl
+        OPENSSL_INCLUDE_PATH=$$OPENSSL_PATH/include
+        OPENSSL_LIB_PATH=$$OPENSSL_PATH/lib
+
+        BOOST_PATH=/usr/local
+        BOOST_INCLUDE_PATH = $$BOOST_PATH/include
+        BOOST_LIB_PATH = $$BOOST_PATH/lib
+        BOOST_LIB_SUFFIX=-mt
+
+        BDB_PATH=/usr/local/opt/berkeley-db
+        BDB_LIB_PATH=$$BDB_PATH/lib
+        BDB_LIB_NAME = db_cxx
+    }
+}
 
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
@@ -259,19 +290,19 @@ FORMS += \
     src/qt/forms/optionsdialog.ui
 
 contains(USE_QRCODE, 1) {
-HEADERS += src/qt/qrcodedialog.h
-SOURCES += src/qt/qrcodedialog.cpp
-FORMS += src/qt/forms/qrcodedialog.ui
+    HEADERS += src/qt/qrcodedialog.h
+    SOURCES += src/qt/qrcodedialog.cpp
+    FORMS += src/qt/forms/qrcodedialog.ui
 }
 
 contains(BITCOIN_QT_TEST, 1) {
-SOURCES += src/qt/test/test_main.cpp \
-    src/qt/test/uritests.cpp
-HEADERS += src/qt/test/uritests.h
-DEPENDPATH += src/qt/test
-QT += testlib
-TARGET = bitcoin-qt_test
-DEFINES += BITCOIN_QT_TEST
+    SOURCES += src/qt/test/test_main.cpp \
+        src/qt/test/uritests.cpp
+    HEADERS += src/qt/test/uritests.h
+    DEPENDPATH += src/qt/test
+    QT += testlib
+    TARGET = bitcoin-qt_test
+    DEFINES += BITCOIN_QT_TEST
 }
 
 CODECFORTR = UTF-8
@@ -312,8 +343,8 @@ isEmpty(BDB_LIB_PATH) {
     macx:BDB_LIB_PATH = /opt/local/lib/db48
 }
 
-isEmpty(BDB_LIB_SUFFIX) {
-    macx:BDB_LIB_SUFFIX = -4.8
+isEmpty(BDB_LIB_NAME) {
+    macx:BDB_LIB_NAME = db_cxx
 }
 
 isEmpty(BDB_INCLUDE_PATH) {
@@ -348,6 +379,7 @@ windows:!contains(MINGW_THREAD_BUGFIX, 0) {
     LIBS += -lrt
 }
 
+macx:QT += macextras widgets
 macx:HEADERS += src/qt/macdockiconhandler.h
 macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
@@ -355,10 +387,11 @@ macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
 macx:TARGET = "Piratecoin-Qt"
 
+
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
 LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
-LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
+LIBS += -lssl -lcrypto -l$$BDB_LIB_NAME
 # -lgdi32 has to happen after -lcrypto (see  #681)
 windows:LIBS += -lws2_32 -lmswsock -lole32 -loleaut32 -luuid -lgdi32
 LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
