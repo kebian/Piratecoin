@@ -15,10 +15,14 @@ CONFIG += no_include_pwd
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
-# For Homebrew builds on mac use install version 5 of Berkeley DB
-#   brew install berkeley-db
+# For Homebrew builds on mac, the following command will install what you need
+#   brew install boost miniupnpc openssl berkeley-db
 # And tell qmake you're using Homebrew by uncommenting the line below
-   CONFIG += homebrew
+    mac:CONFIG += homebrew
+
+# Building on older version of xcode may require the following line uncommented
+# and changed as appropriate
+#    mac:QMAKE_MAC_SDK = /Developer/SDKs/MacOSX10.6.sdk
 
 windows {
     BOOST_INCLUDE_PATH=C:/deps/boost
@@ -41,6 +45,9 @@ clang_pch_style {
     QMAKE_LFLAGS += -stdlib=libc++
     QMAKE_CXXFLAGS_CXX11 -= -std=c++11
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+}
+else {
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
 }
 
 homebrew {
@@ -383,7 +390,7 @@ macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:TARGET = "Luckycoin-Qt"
+macx:TARGET = "Piratecoin-Qt"
 
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
