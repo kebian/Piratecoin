@@ -4,18 +4,20 @@
 
 DEPSDIR:=/usr/i586-mingw32msvc
 
-USE_UPNP:=0
+USE_UPNP:=1
 
 INCLUDEPATHS= \
- -I"$(DEPSDIR)/boost_1_53_0" \
+ -I"$(DEPSDIR)" \
+ -I"$(DEPSDIR)/boost_1_49_0" \
  -I"$(DEPSDIR)/db-4.8.30.NC/build_unix" \
- -I"$(DEPSDIR)/openssl-1.0.1e/include" \
+ -I"$(DEPSDIR)/openssl-1.0.1b/include" \
  -I"$(CURDIR)"/obj \
 
 LIBPATHS= \
- -L"$(DEPSDIR)/boost_1_53_0/stage/lib" \
+ -L"$(DEPSDIR)/miniupnpc" \
+ -L"$(DEPSDIR)/boost_1_49_0/stage/lib" \
  -L"$(DEPSDIR)/db-4.8.30.NC/build_unix" \
- -L"$(DEPSDIR)/openssl-1.0.1e"
+ -L"$(DEPSDIR)/openssl-1.0.1b"
 
 LIBS= \
  -l boost_system-mt-s \
@@ -24,6 +26,7 @@ LIBS= \
  -l boost_thread_win32-mt-s \
  -l db_cxx \
  -l ssl \
+ -l miniupnpc \
  -l crypto
 
 DEFS=-D_MT -DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE -DUSE_IPV6
