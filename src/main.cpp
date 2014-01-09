@@ -33,7 +33,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("dac496eb8b615bea66431ea7228524a02b1441a70c095c9c653ca40ae0c61130");
+uint256 hashGenesisBlock("0xdac496eb8b615bea66431ea7228524a02b1441a70c095c9c653ca40ae0c61130");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 16);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2072,7 +2072,7 @@ bool LoadBlockIndex(bool fAllowNew)
         pchMessageStart[1] = 0xf8;
         pchMessageStart[2] = 0xf8;
         pchMessageStart[3] = 0xd1;
-        hashGenesisBlock = uint256("0xf02b17f6783110bb933a5ba5bf88139d67686cfc4eac611e7698b110864fdcc5");
+        hashGenesisBlock = uint256("0xdac496eb8b615bea66431ea7228524a02b1441a70c095c9c653ca40ae0c61130");
     }
 
     //
