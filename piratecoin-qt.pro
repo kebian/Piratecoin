@@ -4,6 +4,7 @@ VERSION = 1.0.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE USE_IPV6
 CONFIG += no_include_pwd
+USE_UPNP=-
 
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
@@ -25,14 +26,14 @@ CONFIG += no_include_pwd
 #    mac:QMAKE_MAC_SDK = /Developer/SDKs/MacOSX10.6.sdk
 
 windows {
-    BOOST_INCLUDE_PATH=C:/deps/boost
-    BOOST_LIB_PATH=C:/deps/boost/stage/lib
-    BDB_INCLUDE_PATH=C:/deps/db/build_unix
-    BDB_LIB_PATH=C:/deps/db/build_unix
-    OPENSSL_INCLUDE_PATH=C:/deps/ssl/include
-    OPENSSL_LIB_PATH=C:/deps/ssl
-    MINIUPNPC_INCLUDE_PATH=C:/deps
-    MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
+    BOOST_INCLUDE_PATH=../../build/boost_1_49_0
+    BOOST_LIB_PATH=../../build/boost_1_49_0/stage/lib
+    BDB_INCLUDE_PATH=../../build/db-4.8.30.NC/build_unix
+    BDB_LIB_PATH=../../build/db-4.8.30.NC/build_unix
+    OPENSSL_INCLUDE_PATH=../../build/openssl-1.0.1b/include
+    OPENSSL_LIB_PATH=../../build/openssl-1.0.1b
+    MINIUPNPC_INCLUDE_PATH=../../build
+    MINIUPNPC_LIB_PATH=../../build/miniupnpc
 }
 
 OBJECTS_DIR = build
@@ -297,19 +298,19 @@ FORMS += \
     src/qt/forms/optionsdialog.ui
 
 contains(USE_QRCODE, 1) {
-    HEADERS += src/qt/qrcodedialog.h
-    SOURCES += src/qt/qrcodedialog.cpp
-    FORMS += src/qt/forms/qrcodedialog.ui
+HEADERS += src/qt/qrcodedialog.h
+SOURCES += src/qt/qrcodedialog.cpp
+FORMS += src/qt/forms/qrcodedialog.ui
 }
 
 contains(BITCOIN_QT_TEST, 1) {
-    SOURCES += src/qt/test/test_main.cpp \
-        src/qt/test/uritests.cpp
-    HEADERS += src/qt/test/uritests.h
-    DEPENDPATH += src/qt/test
-    QT += testlib
-    TARGET = bitcoin-qt_test
-    DEFINES += BITCOIN_QT_TEST
+SOURCES += src/qt/test/test_main.cpp \
+    src/qt/test/uritests.cpp
+HEADERS += src/qt/test/uritests.h
+DEPENDPATH += src/qt/test
+QT += testlib
+TARGET = bitcoin-qt_test
+DEFINES += BITCOIN_QT_TEST
 }
 
 CODECFORTR = UTF-8
@@ -393,11 +394,10 @@ macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
 macx:TARGET = "Piratecoin-Qt"
 
-
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
 LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
-LIBS += -lssl -lcrypto -l$$BDB_LIB_NAME
+LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
 # -lgdi32 has to happen after -lcrypto (see  #681)
 windows:LIBS += -lws2_32 -lmswsock -lole32 -loleaut32 -luuid -lgdi32
 LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
@@ -410,5 +410,4 @@ contains(RELEASE, 1) {
 }
 
 system($$QMAKE_LRELEASE -silent $$_PRO_FILE_)
-
 
