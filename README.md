@@ -5,27 +5,20 @@ Piratecoin - a fork of Litecoin version with random bonus blocks. Like Litecoin 
 
    - 1 min block target
    - Difficulty retargets every 20 min with accelerated diff adjustment in the beginning
-   - Initially 88 coins per block, halves every 2 months (100,000 blocks)
+   - Initially 100 coins per block, halves every 2 months (100,000 blocks)
    - Total around 20 millions coins
-   - connection port is 9917, RPC-port 9918
+   - connection port is 11656, RPC-port 11655
 
    Random Super-blocks:
     For the 1st 50000 blocks (1st month)
-    - 5% chances 188 coins/block
-    - 1% chances 588 coins/block
-    - 0.01% chances 5888 coins/block (so expect 5 such blocks)
+    - 5% chances 200 coins/block
+    - 1% chances 600 coins/block
+    - 0.01% chances 6000 coins/block (so expect 5 such blocks)
 
     After 50000 blocks
-    - 5% chances 2 times the normal coins (i.e. if normal is 88 coins, you get 176 coins)
+    - 5% chances 2 times the normal coins (i.e. if normal is 100 coins, you get 200 coins)
     - 1% chances 5 times the normal coins
-    - 0.01% chance 58 times the normal coins
-
-
-Official Piratecoin Community Forum
-==================================
-
-Please visit the official Piratecoin community forum for more information.
-https://cryptocointalk.com/forum/188-piratecoin-lky/
+    - 0.01% chance 60 times the normal coins
 
 
 Development process
