@@ -2102,7 +2102,7 @@ bool LoadBlockIndex(bool fAllowNew)
 		//   vMerkleTree: 6f80efd038 
 
         // Genesis block
-        const char* pszTimestamp = "Jan 6 0312 - David Cameron tells older voters the state pension will continue to go up by at least 2.5% a year if the Conservatives win the 2015 general election.";
+        const char* pszTimestamp = "Jan 9 2014 - www.bbc.co.uk/news - Osborne warns over minimum wage hike";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2114,13 +2114,13 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1388977886;
+        block.nTime    = 1389294235;
         block.nBits    = 0x1e0ffff0;
         block.nNonce   = 108996231;
 
         if (fTestNet)
         {
-            block.nTime    = 1388977886;
+            block.nTime    = 1389294235;
             block.nNonce   = 108996231;
         }
 
@@ -2129,10 +2129,10 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
         
-        assert(block.hashMerkleRoot == uint256("e1a25400af3abc2be5189cb04f74af2b128ebe53d4b2d127481f3fd8d5d6d341"));
+        assert(block.hashMerkleRoot == uint256("691a03d59c741f41ef3d7dc5ff605c6ad75cabd058d8cdeb0fa29a149d7b9696"));
 
         // If genesis block hash does not match, then generate new genesis hash.
-        if (false && block.GetHash() != hashGenesisBlock)
+        if (true && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
