@@ -12,7 +12,7 @@ packages:
 - "faketime"
 reference_datetime: "2011-01-30 00:00:00"
 remotes:
-- "url": "https://github.com/motd2k/Piratecoin.git"
+- "url": "https://github.com/kebian/Piratecoin.git"
   "dir": "Piratecoin"
 files:
 - "qt-win32-4.7.4-gitian.zip"
