@@ -18,7 +18,7 @@ CONFIG += no_include_pwd
 # For Homebrew builds on mac, the following command will install what you need
 #   brew install boost miniupnpc openssl berkeley-db
 # And tell qmake you're using Homebrew by uncommenting the line below
-    mac:CONFIG += homebrew
+    macx:CONFIG += homebrew
 
 # Building on older version of xcode may require the following line uncommented
 # and changed as appropriate
@@ -44,10 +44,10 @@ clang_pch_style {
     QMAKE_CXXFLAGS += -stdlib=libc++
     QMAKE_LFLAGS += -stdlib=libc++
     QMAKE_CXXFLAGS_CXX11 -= -std=c++11
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+    macx:QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
 }
 else {
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+    macx:QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
 }
 
 homebrew {
@@ -67,6 +67,7 @@ homebrew {
         BDB_LIB_NAME = db_cxx
     }
 }
+
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
     # Mac: compile for maximum compatibility (10.5, 32-bit)
@@ -337,7 +338,7 @@ OTHER_FILES += \
 
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
-    macx:BOOST_LIB_SUFFIX = -mt
+    !windows:BOOST_LIB_SUFFIX = -mt
     windows:BOOST_LIB_SUFFIX = -mgw46-mt-1_54
 }
 
@@ -350,7 +351,7 @@ isEmpty(BDB_LIB_PATH) {
 }
 
 isEmpty(BDB_LIB_NAME) {
-    macx:BDB_LIB_NAME = db_cxx
+    BDB_LIB_NAME = db_cxx
 }
 
 isEmpty(BDB_INCLUDE_PATH) {
