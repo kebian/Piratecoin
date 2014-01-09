@@ -25,14 +25,14 @@ CONFIG += no_include_pwd
 #    mac:QMAKE_MAC_SDK = /Developer/SDKs/MacOSX10.6.sdk
 
 windows {
-    BOOST_INCLUDE_PATH=../../build/boost_1_49_0
-    BOOST_LIB_PATH=../../build/boost_1_49_0/stage/lib
-    BDB_INCLUDE_PATH=../../build/db-4.8.30.NC/build_unix
-    BDB_LIB_PATH=../../build/db-4.8.30.NC/build_unix
-    OPENSSL_INCLUDE_PATH=../../build/openssl-1.0.1b/include
-    OPENSSL_LIB_PATH=../../build/openssl-1.0.1b
-    MINIUPNPC_INCLUDE_PATH=../../build
-    MINIUPNPC_LIB_PATH=../../build/miniupnpc
+    BOOST_INCLUDE_PATH=C:/deps/boost
+    BOOST_LIB_PATH=C:/deps/boost/stage/lib
+    BDB_INCLUDE_PATH=C:/deps/db/build_unix
+    BDB_LIB_PATH=C:/deps/db/build_unix
+    OPENSSL_INCLUDE_PATH=C:/deps/ssl/include
+    OPENSSL_LIB_PATH=C:/deps/ssl
+    MINIUPNPC_INCLUDE_PATH=C:/deps
+    MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
 }
 
 OBJECTS_DIR = build
