@@ -6,7 +6,7 @@ Piratecoin - a fork of Litecoin version with random bonus blocks. Like Litecoin 
    - 1 min block target
    - Difficulty retargets every 20 min with accelerated diff adjustment in the beginning
    - Initially 100 coins per block, halves every 2 months (100,000 blocks)
-   - Total around 20 millions coins
+   - Total around 25 millions coins
    - connection port is 11656, RPC-port 11655
 
    Random Super-blocks:
